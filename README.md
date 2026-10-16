@@ -1,17 +1,19 @@
-# theexemplar
+# THE EXEMPLAR
 
-A new Flutter project.
+A Flutter member and event tracker for THE EXEMPLAR school publication.
 
-## Getting Started
+## Demo on GitHub Pages
 
-This project is a starting point for a Flutter application.
+The `Deploy Flutter web app to GitHub Pages` workflow builds and deploys the app
+when changes are pushed to `main`.
 
-A few resources to get you started if this is your first Flutter project:
+1. In the GitHub repository, open **Settings → Pages**.
+2. Set the build and deployment source to **GitHub Actions**.
+3. Push to `main` or manually run the deployment workflow from the **Actions**
+   tab.
+4. Open <https://alpelenio.github.io/PELENIO_FlutterFinalProject/> on your
+   phone. You can add it to your home screen from the browser menu.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The demo stores members, events, and login state in the current browser's local
+storage. Data does not sync between phones or users and may be cleared with
+browser data. The client-side login is for demonstration only, not security.

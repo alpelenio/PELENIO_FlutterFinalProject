@@ -1,11 +1,11 @@
 {
-    "name": "theexemplar",
-    "short_name": "theexemplar",
+    "name": "THE EXEMPLAR",
+    "short_name": "Exemplar",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "THE EXEMPLAR school publication member and event tracker.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
