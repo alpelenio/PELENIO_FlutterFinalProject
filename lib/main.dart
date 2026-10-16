@@ -209,16 +209,17 @@ class Store extends ChangeNotifier {
       currentUsername = null;
       await _p.remove('currentUsername');
     }
-    if (members.isEmpty && events.isEmpty && !_p.containsKey('seeded')) {
-      members = [
-        Member('1', 'Jane Doe', 'Editor-in-Chief', DateTime(2007, 6, 12)),
-        Member('2', 'John Smith', 'Photo Editor', DateTime(2007, 8, 25)),
-        Member('3', 'Maria Garcia', 'Staff Writer', DateTime(2008, 11, 3)),
-        Member('4', 'Alex Chen', 'Layout Artist', DateTime(2008, 2, 18)),
-      ];
-      _p.setBool('seeded', true);
-      _save();
-    }
+    const sampleMemberNames = {
+      'Jane Doe',
+      'John Smith',
+      'Maria Garcia',
+      'Alex Chen',
+    };
+    final memberCountBeforeSampleCleanup = members.length;
+    members.removeWhere((member) => sampleMemberNames.contains(member.name));
+    final removedSampleMembers =
+        members.length != memberCountBeforeSampleCleanup;
+    await _p.setBool('seeded', true);
     if (_p.getBool('editorialBoardSeeded') != true) {
       for (var i = 0; i < editorialBoard.length; i++) {
         final boardMember = editorialBoard[i];
@@ -242,6 +243,8 @@ class Store extends ChangeNotifier {
         }
       }
       await _p.setBool('editorialBoardSeeded', true);
+      _save();
+    } else if (removedSampleMembers) {
       _save();
     }
     notifyListeners();

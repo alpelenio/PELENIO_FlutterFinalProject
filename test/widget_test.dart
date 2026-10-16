@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui' show PointerDeviceKind;
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_exemplar/main.dart';
 
 void main() {
+  test('removes sample members without deleting user-added members', () async {
+    SharedPreferences.setMockInitialValues({
+      'seeded': true,
+      'editorialBoardSeeded': true,
+      'members': jsonEncode([
+        Member('1', 'Jane Doe', 'Editor-in-Chief', DateTime(2007, 6, 12))
+            .toJson(),
+        Member('2', 'John Smith', 'Photo Editor', DateTime(2007, 8, 25))
+            .toJson(),
+        Member('custom', 'Student Member', 'Writer', null).toJson(),
+      ]),
+      'events': '[]',
+    });
+
+    await store.load();
+
+    expect(store.members.map((member) => member.name), ['Student Member']);
+    final preferences = await SharedPreferences.getInstance();
+    final savedMembers = (jsonDecode(preferences.getString('members')!) as List)
+        .cast<Map<String, dynamic>>();
+    expect(savedMembers.map((member) => member['name']), ['Student Member']);
+  });
+
   testWidgets('editorial board highlights the editor-in-chief first',
       (tester) async {
     SharedPreferences.setMockInitialValues({});
